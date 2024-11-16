@@ -1,13 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-  const {createNewUser,setUser}=useContext(AuthContext)
+  const {createNewUser,setUser}=useContext(AuthContext);
+  const [error,setError] = useState({})
   const handleSubmit=(e)=>{
     e.preventDefault();
     const form = new FormData(e.target);
     const name = form.get('name');
+    if(name.length<5){
+      setError({...error,name:"Name must be 5 character long"})
+      return;
+    }
     const email = form.get('email');
     const photoUrl = form.get('photoUrl');
     const password = form.get('password');
@@ -35,6 +40,11 @@ const Register = () => {
       </label>
       <input name="name" type="text" placeholder="name" className="input input-bordered" required />
     </div>
+    {
+      error.name && (<label className="label text-xs text-red-500">
+        {error.name}
+      </label>)
+    }
     <div className="form-control">
       <label className="label">
         <span className="label-text">Photo URL</span>
