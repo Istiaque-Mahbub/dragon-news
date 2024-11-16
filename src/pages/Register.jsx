@@ -17,7 +17,7 @@ const Register = () => {
     const email = form.get('email');
     const photoUrl = form.get('photoUrl');
     const password = form.get('password');
-    console.log(name,photoUrl,email,password)
+    // console.log(name,photoUrl,email,password)
     createNewUser(email,password)
     .then(result=>{
       const user = result.user;
