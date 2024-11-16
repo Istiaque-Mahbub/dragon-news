@@ -13,7 +13,17 @@ const NavBar = () => {
                 <Link to='/about'>About</Link>
             </div>
             <div className="flex gap-3 items-center">
-                <div><img src={userIcon} alt="" /></div>
+                {
+                    user && user?.email ?
+                    (<div><img className="w-10 rounded-full" src={user.photoURL} alt="" />
+                    <p>{user.displayName}</p>
+                    </div>
+                        
+                    ) 
+                    : 
+                    (<div><img src={userIcon} alt="" /></div>)
+                }
+                
                 {
                     user && user?.email? 
                      <button onClick={logOut} className="btn btn-neutral">Log-Out</button>
